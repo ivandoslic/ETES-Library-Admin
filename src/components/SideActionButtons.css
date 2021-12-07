@@ -1,0 +1,21 @@
+.main-container-action {
+    width: 80%;
+    background-color: #202c39;
+    height: 10%;
+    border-radius: 25px;
+    margin-top: 5%;
+    color: grey;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.action-button-icon:hover {
+    color: white;
+    transform: translateY(-5px);
+    transition: 150ms;
+}
+
+.action-button-icon:active {
+    color: grey;
+}

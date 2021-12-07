@@ -1,0 +1,29 @@
+.main-container {
+    width: 80%;
+    background-color: #202c39;
+    height: 21%;
+    border-radius: 25px;
+    border: solid 2px;
+    border-color: #fd644f;
+    margin-top: 5%;
+}
+
+.container-title {
+    color: white;
+    font-size: 18px;
+    width: 100%;
+    font-weight: bold;
+    margin-left: 5%;
+}
+
+.container-title::before {
+    color: #fd644f;
+    content: 'Achievement';
+}
+
+.container-text {
+    margin-left: 5%;
+    margin-right: 5%;
+    font-size: 14px;
+    color: grey;
+}

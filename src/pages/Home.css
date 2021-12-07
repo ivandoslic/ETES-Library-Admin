@@ -1,0 +1,26 @@
+.home-header {
+    width: 100%;
+    display: inline-flex;
+    justify-content: space-between;
+}
+
+.home-header-greetings {
+    color: white;
+}
+
+.home-header-greetings h1 {
+    margin-bottom: 0;
+}
+
+.home-header-greetings p {
+    margin-top: 0;
+}
+
+.home-header-date {
+    color: white;
+}
+
+.home-header-date h2 {
+    margin-top: 32px;
+    margin-right: 16px;
+}
