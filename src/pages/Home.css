@@ -24,3 +24,22 @@
     margin-top: 32px;
     margin-right: 16px;
 }
+
+.home-body {
+    width: 100%;
+    height: 80vh;
+    position: relative;
+}
+
+.home-upper-body {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    flex-direction: row;
+}
+
+.home-lower-body {
+    height: 50%;
+    display: flex;
+    flex-direction: row;
+}

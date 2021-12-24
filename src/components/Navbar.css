@@ -44,6 +44,11 @@
     background-color: #272727;
     border-right-style: solid;
     border-color: #fd644f;
+    outline: 0;
+}
+
+.nav-text-selected a:active, a:hover { 
+    outline: 0;
 }
 
 .nav-text {

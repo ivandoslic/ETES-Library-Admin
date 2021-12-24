@@ -1,0 +1,43 @@
+.main-container-lcp{
+    width: 60%;
+    border-radius: 25px;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+}
+
+.librarians-choice-string-lcp {
+    font-weight: bold;
+    color: white;
+    opacity: 0.5;
+    padding: 0;
+    margin: 0 0 1% 3%;
+}
+
+.librarians-choice-title-lcp {
+    color: white;
+    font-size: x-large;
+    padding: 0;
+    margin: 0 0 3% 3%;
+}
+
+.librarians-choice-tdiv-lcp {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.librarians-choice-forward-arrow-lcp {
+    color: white;
+    margin-right: 3%;
+    transition: 150ms;
+}
+
+.librarians-choice-forward-arrow-lcp:hover {
+    transform: scale(1.3);
+    transition: 150ms;
+}
+
+.librarians-choice-forward-arrow-lcp:active {
+    opacity: 0.5;
+}

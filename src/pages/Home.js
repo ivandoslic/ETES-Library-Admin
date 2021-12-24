@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from 'react'
+import AchievementsOpenHome from '../components/AchievementsOpenHome';
+import GlobalNotificationsCreate from '../components/GlobalNotificationsCreate';
+import LatestReviewHome from '../components/LatestReviewHome';
+import LibrariansChoicePreview from '../components/LibrariansChoicePreview';
 import './Home.css'
 
 function Home() {
@@ -48,6 +52,16 @@ function Home() {
                 </div>
                 <div className="home-header-date">
                     <h2>{date}</h2>
+                </div>
+            </div>
+            <div className="home-body">
+                <div className="home-upper-body">
+                    <LibrariansChoicePreview />
+                    <GlobalNotificationsCreate />
+                </div>
+                <div className="home-lower-body">
+                    <AchievementsOpenHome />
+                    <LatestReviewHome />
                 </div>
             </div>
         </div>
