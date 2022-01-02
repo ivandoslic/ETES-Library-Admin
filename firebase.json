@@ -1,0 +1,25 @@
+{
+  "database": {
+    "rules": "database.rules.json"
+  },
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "hosting": {
+    "public": "build",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "site": "etes-library"
+  },
+  "storage": {
+    "rules": "storage.rules"
+  },
+  "emulators": {},
+  "remoteconfig": {
+    "template": "remoteconfig.template.json"
+  }
+}

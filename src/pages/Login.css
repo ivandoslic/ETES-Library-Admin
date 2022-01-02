@@ -1,0 +1,127 @@
+.main-container-login {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+}
+
+.form-side {
+    width: 50%;
+    height: 100%;
+}
+
+.info-side {
+    width: 50%;
+    height: 100%;
+    background-color: #283845;
+}
+
+.form-title {
+    color: white;
+    margin-top: 30%;
+    margin-left: 10%;
+    font-size: 48px;
+    font-weight: normal;
+}
+
+.form-password {
+    width: 70%;
+    font-size: 24px;
+    margin-left: 10%;
+    border: 0;
+    background: transparent;
+    color: white;
+    border-bottom: solid white;
+    border-bottom-width: 2px;
+}
+
+.form-password:focus {
+    border: none;
+    outline: none;
+    border-bottom: solid white;
+    border-bottom-width: 2px;
+}
+
+.form-login-error {
+    color: red;
+    opacity: 0.75;
+    margin-left: 10%;
+    margin-top: 5px;
+    margin-bottom: 0;
+}
+
+.form-submit-button {
+    user-select: none;
+    width: 30%;
+    height: 8%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid white;
+    border-radius: 25px;
+    margin-top: 5%;
+    margin-left: 30%;
+    margin-bottom: 20%;
+}
+
+.form-submit-button p{
+    color: white;
+    font-size: 24px;
+}
+
+.form-submit-button:hover {
+    background-color: rgba(255, 255, 255, 0.10);
+}
+
+.form-submit-button:active {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.form-side-question {
+    margin-left: 5%;
+    color: white;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-weight: normal;
+    font-size: 20px;
+}
+
+.form-side-answer {
+    color: white;
+    font-weight: lighter;
+    margin-left: 5%;
+}
+
+.icon-login {
+    height: 20%;
+    margin-left: 10%;
+    margin-top: 10%;
+    filter: invert();
+}
+
+.info-side-title:first-of-type {
+    margin-top: 5%;
+}
+
+.info-side-title {
+    margin: 0;
+    margin-left: 10%;
+    color: white;
+    font-size: 48px;
+    font-weight: normal;
+}
+
+.info-side-label {
+    color: white;
+    margin-left: 10%;
+}
+
+.info-side-question {
+    color: white;
+    margin-left: 10%;
+    margin-top: 10%;
+    font-size: 28px;
+    margin-bottom: 2%;
+}

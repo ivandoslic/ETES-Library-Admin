@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './GlobalNotificationsCreate.css'
 import logo from '../res/notifications-logo.png'
+import { AuthContext } from '../Auth';
+import { getAuth, signOut } from 'firebase/auth';
 
 export default function GlobalNotificationsCreate() {
     return (

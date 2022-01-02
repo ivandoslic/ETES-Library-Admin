@@ -24,7 +24,7 @@ export default function LatestReviewHome() {
                 <div className="review-info-lrh">
                     <p className="review-info-title-lrh">" Title "</p>
                     <p className="review-info-desc-lrh">description</p>
-                    <ReviewRatingComponent rating={4.5} starSize={24} />
+                    {/*<ReviewRatingComponent rating={4.5} starSize={24} />*/}
                 </div>
                 <MdIcons.MdOutlineFormatQuote size={42} style={{ color: 'white' }} className="right-quote-lrh" />
             </div>
