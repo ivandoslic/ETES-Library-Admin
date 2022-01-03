@@ -1,0 +1,71 @@
+.main-container-books {
+    width: 100%;
+}
+
+.header-books {
+    width: 95%;
+    height: 30vh;
+    border-radius: 25px;
+    background: linear-gradient(rgba(32, 44, 57, 0.5), rgba(32, 44, 57,.5)), url(https://firebasestorage.googleapis.com/v0/b/eteslib.appspot.com/o/CroppedBooksHeader.jpg?alt=media&token=2e457fc5-6f01-487b-93db-d5f3cba2df55);
+    background-size: cover;
+}
+
+.header-books h1 {
+    color: white;
+    margin-left: 2%;
+    margin-bottom: 10px;
+    text-shadow: 0 0 6px black;
+}
+
+.header-books p {
+    color: white;
+    margin-left: 2%;
+    font-weight: normal;
+    font-size: 20px;
+    margin-top: 0;
+    text-shadow: 0 0 6px black;
+}
+
+.footer-books {
+    margin-top: 5%;
+    display: flex;
+    flex-direction: row;
+}
+
+.container-action-books {
+    margin-top: 5%;
+    margin-left: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 25%;
+}
+
+.logo-add-book {
+    transform: scale(0.75);
+    margin-bottom: 0;
+}
+
+.action-button-book {
+    display: flex;
+    background-color: white;
+    border-radius: 25px;
+    width: 100%;
+    justify-content: center;
+}
+
+.action-button-book p {
+    color: #272727;
+    font-size: large;
+    font-weight: bolder;
+    margin: 5% 0 5% 0;
+}
+
+.action-button-book:hover {
+    opacity: 0.75;
+}
+
+.action-button-book:active {
+    opacity: 0.5;
+}

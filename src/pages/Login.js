@@ -6,6 +6,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { Alert } from '@mui/material';
 import './Login.css'
 
+// TODO : check for number of attempts for login to disable bruteforceing and prevent firebase from blocking librarian when logging in
 
 const Login = () => {
     const [password, setPassword] = useState("");

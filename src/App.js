@@ -3,6 +3,7 @@ import './App.css';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Books from './pages/Books';
+import Authors from './pages/Authors'
 import Login from './pages/Login';
 import AchievementInfo from './components/AchievementInfo';
 import SidebarActionButtons from './components/SidebarActionButtons';
@@ -21,6 +22,7 @@ function App() {
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/books" component={Books} />
+            <Route path="/authors" component={Authors} />
           </Switch>
         </div>
       </Router>

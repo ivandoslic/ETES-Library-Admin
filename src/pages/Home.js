@@ -61,7 +61,7 @@ function Home() {
                 </div>
                 <div className="home-lower-body">
                     <AchievementsOpenHome />
-                    <LatestReviewHome />
+                    <LatestReviewHome /> {/*TODO: Check browser type and add extra margin-left [only firefox is ok, as much as I checked]*/}
                 </div>
             </div>
         </div>

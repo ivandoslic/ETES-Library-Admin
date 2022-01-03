@@ -1,0 +1,23 @@
+.header-authors {
+    width: 95%;
+    height: 30vh;
+    border-radius: 25px;
+    background: linear-gradient(rgba(32, 44, 57, 0.5), rgba(32, 44, 57,.5)), url(https://firebasestorage.googleapis.com/v0/b/eteslib.appspot.com/o/CroppedAuthorsHeader.jpg?alt=media&token=0729132d-2811-4f1a-845e-50bb9a0a51da);
+    background-size: cover;
+}
+
+.header-authors h1 {
+    color: white;
+    margin-left: 2%;
+    margin-bottom: 10px;
+    text-shadow: 0 0 6px black;
+}
+
+.header-authors p {
+    color: white;
+    margin-left: 2%;
+    font-weight: normal;
+    font-size: 20px;
+    margin-top: 0;
+    text-shadow: 0 0 6px black;
+}
