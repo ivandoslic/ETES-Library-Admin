@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import app from "./base";
+import { app } from "./base";
 import * as FirebaseAuth from 'firebase/auth';
 import Login from "./pages/Login";
 

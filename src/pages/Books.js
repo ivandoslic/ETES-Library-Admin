@@ -33,7 +33,7 @@ function Books() {
                     </div>
                 </div>
             </div>
-            <Modal show={showModal} setShow={activatePopup} title='Add Book' />
+            <Modal show={showModal} setShow={activatePopup} />
         </div>
     )
 }
