@@ -1,13 +1,16 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useCallback } from 'react'
 import './Authors.css'
 import logo1 from '../res/add-author.png'
 import logo2 from '../res/list-books.png'
 import profile_placeholder from '../res/author-profile-placeholder.jpg'
 import Modal from '../components/Modal'
 import nationalities from '../res/nationalities.json'
-import { storage } from '../base'
+import Base from '../base'
+import { addDoc, collection } from 'firebase/firestore'
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 import * as MdIcons from 'react-icons/md'
 import * as RiIcons from 'react-icons/ri'
+import ImageCropper from '../components/ImageCropper'
 
 export default function Authors() {
     // Author info :
@@ -24,9 +27,85 @@ export default function Authors() {
     const [selectedAuthorImage, setSelectedAuthorImage] = useState(null);
     const [selectedImageURL, setSelectedImageURL] = useState(null);
 
+    // Image Cropper :
+    const [showCropper, setShowCropper] = useState(false);
+    const [croppedImageURL, setCroppedImageURL] = useState(null);
+    const [croppedImage, setCroppedImage] = useState(null);
+
+    const handleCroppingDone = (croppedImage) => {
+        const croppedImageUrl = URL.createObjectURL(croppedImage);
+        setCroppedImageURL(croppedImageUrl);
+        setCroppedImage(croppedImage);
+        setShowCropper(false);
+        setShowModal(true);
+    }
+
+    const handleCropperCanceled = () => {
+        setSelectedAuthorImage(null);
+        setSelectedImageURL(null);
+        setShowCropper(false);
+        setShowModal(true);
+    }
+
+    const startCropping = () => {
+        setShowModal(false);
+        setShowCropper(true);
+    }
+
+    const validateAuthorInfo = () => {
+        if (firstName.slice() === '' || firstName === null) {
+            // error handling
+            return false;
+        }
+
+        if (lastName.slice() === '' || lastName === null) {
+            return false;
+        }
+
+        if (literaryMovement.slice() === '' || literaryMovement === null) {
+            return false;
+        }
+
+        if (!dateOfBirth) {
+            return false;
+        }
+
+        if (!authorNationality) {
+            return false;
+        }
+
+        return true;
+    }
+
     const handleSubmit = () => {
-        console.log(firstName, lastName, literaryMovement, dateOfBirth, authorNationality);
-        console.log(selectedAuthorImage, `URL: ${selectedImageURL}`);
+        if (validateAuthorInfo()) {
+            if (croppedImage) {
+                const storageRef = ref(Base.storage, 'author-profiles/' + lastName.slice() + firstName.slice() + '.jpg');
+                uploadBytes(storageRef, croppedImage).then((snapshot) => {
+                    console.log('UPLOADED!!!!', snapshot.ref);
+                    getDownloadURL(snapshot.ref).then((downloadURL) => {
+                        addDoc(collection(Base.firestoreDB, "authors"), {
+                            name: firstName + " " + lastName,
+                            movement: literaryMovement,
+                            birthday: dateOfBirth,
+                            nationality: authorNationality,
+                            author_image: downloadURL
+                        }).then((docRef) => {
+                            // If everything successfull, close modal, and clear all values so you can start again...
+                        }).catch(e => {
+                            console.error(e);
+                            return;
+                        });
+                        // TODO :
+                        // notify that image is uploaded...
+                        // notify that profile is created...
+                    })
+                }).catch(e => {
+                    // handle error
+                    return;
+                });
+            }
+        }
     }
 
     const activatePopup = () => {
@@ -41,6 +120,7 @@ export default function Authors() {
         if (event.target.files && event.target.files.length === 1) {
             setSelectedAuthorImage(event.target.files[0]);
             setSelectedImageURL(URL.createObjectURL(event.target.files[0]));
+            startCropping();
         }
     }
 
@@ -86,11 +166,18 @@ export default function Authors() {
                     </div>
                     <div className='lower-rsam'>
                         <input type="file" accept='.jpg,.png,.jpeg' style={{ display: 'none' }} ref={imageFileElement} onChange={handleImageChange} />
-                        {selectedAuthorImage ? <img src={selectedImageURL} className='image-display-authors-modal' /> : <img src={profile_placeholder} className='image-display-authors-modal' />}
+                        {selectedAuthorImage ? <img src={croppedImageURL} className='image-display-authors-modal' /> : <img src={profile_placeholder} className='image-display-authors-modal' />}
                         <RiIcons.RiEditCircleFill color='white' size={48} className='edit-image-authors-modal' onClick={handleOpenImageSelector} />
                     </div>
                 </div>
             </Modal>
+            <ImageCropper
+                show={showCropper}
+                image={selectedImageURL}
+                aspect={1 / 1}
+                onCancle={handleCropperCanceled}
+                handleCroppingDone={handleCroppingDone}
+            />
         </div>
     )
 }

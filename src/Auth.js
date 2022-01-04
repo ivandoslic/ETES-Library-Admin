@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { app } from "./base";
+import Base from "./base";
 import * as FirebaseAuth from 'firebase/auth';
 import Login from "./pages/Login";
 
@@ -9,7 +9,13 @@ export const AuthProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState(null);
 
     useEffect(() => {
-        FirebaseAuth.getAuth().onAuthStateChanged(setCurrentUser);
+        const unlisten = FirebaseAuth.getAuth().onAuthStateChanged(authUser => {
+            authUser ? setCurrentUser(authUser) : setCurrentUser(null);
+        });
+
+        return () => {
+            unlisten();
+        }
     }, []);
 
     if (!currentUser) {

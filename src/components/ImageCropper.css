@@ -1,0 +1,56 @@
+.backdrop {
+    position: fixed;
+    background-color: black;
+    background-color: rgba(0, 0, 0, .5);
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+}
+
+.crop-container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 120px;
+}
+
+.controls-cropper {
+    position: fixed;
+    bottom: 0px;
+    left: 0;
+    height: 80px;
+    width: 100%;
+}
+
+.controls-cropper-upper-area {
+    text-align: center;
+}
+
+.slider {
+    width: 25%;
+    margin-bottom: 1%;
+}
+
+.cropper-button-area {
+    text-align: center;
+}
+
+.cropper-button-area button {
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+    color: white;
+    background: transparent;
+    border-radius: 25px;
+    font-size: 18px;
+    width: 10%;
+}
+
+.cropper-button-area button:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+}
+
+.cropper-button-area button:active {
+    background-color: rgba(255, 255, 255, 0.5);
+}
