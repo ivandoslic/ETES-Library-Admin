@@ -7,10 +7,12 @@ import Modal from '../components/Modal'
 import nationalities from '../res/nationalities.json'
 import Base from '../base'
 import { addDoc, collection } from 'firebase/firestore'
-import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
+import { getDownloadURL, ref, uploadBytes, uploadBytesResumable } from 'firebase/storage'
 import * as MdIcons from 'react-icons/md'
 import * as RiIcons from 'react-icons/ri'
 import ImageCropper from '../components/ImageCropper'
+import CircularProgress from '@mui/material/CircularProgress';
+import OptimizedSnackbar from '../components/OptimizedSnackbar'
 
 export default function Authors() {
     // Author info :
@@ -32,12 +34,41 @@ export default function Authors() {
     const [croppedImageURL, setCroppedImageURL] = useState(null);
     const [croppedImage, setCroppedImage] = useState(null);
 
+    // Snackbar :
+    const [snackbarOpened, setSnackbarOpened] = useState(false);
+    const [isSnackbarAlert, setIsSnackbarAlert] = useState(false);
+    const [snackbarDuration, setSnackbarDuration] = useState(null);
+    const [snackbarMessage, setSnackbarMessage] = useState(null);
+    const [snackbarAlertType, setSnackbarAlertType] = useState('success');
+
     const handleCroppingDone = (croppedImage) => {
         const croppedImageUrl = URL.createObjectURL(croppedImage);
         setCroppedImageURL(croppedImageUrl);
         setCroppedImage(croppedImage);
         setShowCropper(false);
         setShowModal(true);
+    }
+
+    const makeErrorMessage = (message, duration) => {
+        setIsSnackbarAlert(true);
+        setSnackbarDuration(duration);
+        setSnackbarMessage(message);
+        setSnackbarAlertType('error');
+        setSnackbarOpened(true);
+    }
+
+    const makeSuccesMessage = (message, duration) => {
+        setIsSnackbarAlert(true);
+        setSnackbarDuration(duration);
+        setSnackbarMessage(message);
+        setSnackbarAlertType('success');
+        setSnackbarOpened(true);
+    }
+
+    const makeSnack = (message, duration) => {
+        setSnackbarMessage(message);
+        setSnackbarDuration(duration);
+        setSnackbarOpened(true);
     }
 
     const handleCropperCanceled = () => {
@@ -54,23 +85,27 @@ export default function Authors() {
 
     const validateAuthorInfo = () => {
         if (firstName.slice() === '' || firstName === null) {
-            // error handling
+            makeErrorMessage("First name can't be empty!", 5000);
             return false;
         }
 
         if (lastName.slice() === '' || lastName === null) {
+            makeErrorMessage("Last name can't be empty!", 5000);
             return false;
         }
 
         if (literaryMovement.slice() === '' || literaryMovement === null) {
+            makeErrorMessage("Literary movement can't be empty!", 5000);
             return false;
         }
 
         if (!dateOfBirth) {
+            makeErrorMessage("Date of birth can't be empty!", 5000);
             return false;
         }
 
         if (!authorNationality) {
+            makeErrorMessage("Authors nationality must be selected!", 5000);
             return false;
         }
 
@@ -79,11 +114,23 @@ export default function Authors() {
 
     const handleSubmit = () => {
         if (validateAuthorInfo()) {
+            setShowModal(false);
             if (croppedImage) {
+                makeSnack('Trying to upload image...');
                 const storageRef = ref(Base.storage, 'author-profiles/' + lastName.slice() + firstName.slice() + '.jpg');
-                uploadBytes(storageRef, croppedImage).then((snapshot) => {
-                    console.log('UPLOADED!!!!', snapshot.ref);
-                    getDownloadURL(snapshot.ref).then((downloadURL) => {
+                const uploadTask = uploadBytesResumable(storageRef, croppedImage);
+                uploadTask.on('state_changed', (snapshot) => {
+
+                    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    makeSnack(`Uploading... ${progress}%`);
+
+                }, (error) => {
+                    makeErrorMessage(`Oopsie... ${error}`, 5000);
+                    setShowModal(true);
+                    return;
+                }, () => {
+                    makeSuccesMessage("Successfully uploaded authors image!");
+                    getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
                         addDoc(collection(Base.firestoreDB, "authors"), {
                             name: firstName + " " + lastName,
                             movement: literaryMovement,
@@ -91,17 +138,27 @@ export default function Authors() {
                             nationality: authorNationality,
                             author_image: downloadURL
                         }).then((docRef) => {
-                            // If everything successfull, close modal, and clear all values so you can start again...
-                        }).catch(e => {
-                            console.error(e);
+                            makeSuccesMessage("Successfully created authors profile!", 5000);
+                            resetEverything();
+                        }).catch(error => {
+                            makeErrorMessage(`Oopsie... ${error}`, 5000);
                             return;
                         });
-                        // TODO :
-                        // notify that image is uploaded...
-                        // notify that profile is created...
                     })
-                }).catch(e => {
-                    // handle error
+                });
+
+            } else {
+                addDoc(collection(Base.firestoreDB, "authors"), {
+                    name: firstName + " " + lastName,
+                    movement: literaryMovement,
+                    birthday: dateOfBirth,
+                    nationality: authorNationality,
+                    author_image: ""
+                }).then((docRef) => {
+                    makeSuccesMessage("Successfully created authors profile!", 5000);
+                    resetEverything();
+                }).catch(error => {
+                    makeErrorMessage(`Oopsie... ${error}`, 5000);
                     return;
                 });
             }
@@ -122,6 +179,20 @@ export default function Authors() {
             setSelectedImageURL(URL.createObjectURL(event.target.files[0]));
             startCropping();
         }
+    }
+
+    const resetEverything = () => {
+        setFirstName("");
+        setLastName("");
+        setLiteraryMovement("");
+        setDateOfBirth("");
+        setAuthorNationality("");
+        setShowModal(false);
+        setSelectedAuthorImage(null);
+        setSelectedImageURL(null);
+        setShowCropper(false);
+        setCroppedImage(null);
+        setCroppedImageURL(null);
     }
 
     return (
@@ -177,6 +248,17 @@ export default function Authors() {
                 aspect={1 / 1}
                 onCancle={handleCropperCanceled}
                 handleCroppingDone={handleCroppingDone}
+            />
+            <OptimizedSnackbar
+                opened={snackbarOpened}
+                setOpened={setSnackbarOpened}
+                isAlert={isSnackbarAlert}
+                setIsAlert={setIsSnackbarAlert}
+                duration={snackbarDuration}
+                setDuration={setSnackbarDuration}
+                message={snackbarMessage}
+                setMessage={setSnackbarMessage}
+                type={snackbarAlertType}
             />
         </div>
     )
