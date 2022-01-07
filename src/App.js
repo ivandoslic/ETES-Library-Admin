@@ -8,24 +8,27 @@ import Login from './pages/Login';
 import AchievementInfo from './components/AchievementInfo';
 import SidebarActionButtons from './components/SidebarActionButtons';
 import { AuthProvider } from './Auth';
+import { FirebaseContentProvider } from './FirebaseContent';
 
 function App() {
   return (
     <AuthProvider>
-      <Router className="router">
-        <div className="sidebar">
-          <Navbar />
-          <AchievementInfo />
-          <SidebarActionButtons />
-        </div>
-        <div className="dashboard">
-          <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/books" component={Books} />
-            <Route path="/authors" component={Authors} />
-          </Switch>
-        </div>
-      </Router>
+      <FirebaseContentProvider>
+        <Router className="router">
+          <div className="sidebar">
+            <Navbar />
+            <AchievementInfo />
+            <SidebarActionButtons />
+          </div>
+          <div className="dashboard">
+            <Switch>
+              <Route path="/" exact component={Home} />
+              <Route path="/books" component={Books} />
+              <Route path="/authors" component={Authors} />
+            </Switch>
+          </div>
+        </Router>
+      </FirebaseContentProvider>
     </AuthProvider>
   );
 }

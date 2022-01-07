@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react'
+import React, { useState, useRef, useCallback, useContext } from 'react'
 import './Authors.css'
 import logo1 from '../res/add-author.png'
 import logo2 from '../res/list-books.png'
@@ -12,7 +12,8 @@ import * as MdIcons from 'react-icons/md'
 import * as RiIcons from 'react-icons/ri'
 import ImageCropper from '../components/ImageCropper'
 import CircularProgress from '@mui/material/CircularProgress';
-import OptimizedSnackbar from '../components/OptimizedSnackbar'
+import OptimizedSnackbar from '../components/OptimizedSnackbar';
+import { FirebaseContentContext } from '../FirebaseContent';
 
 export default function Authors() {
     // Author info :
@@ -40,6 +41,9 @@ export default function Authors() {
     const [snackbarDuration, setSnackbarDuration] = useState(null);
     const [snackbarMessage, setSnackbarMessage] = useState(null);
     const [snackbarAlertType, setSnackbarAlertType] = useState('success');
+
+    // Data context
+    const authors = useContext(FirebaseContentContext);
 
     const handleCroppingDone = (croppedImage) => {
         const croppedImageUrl = URL.createObjectURL(croppedImage);
@@ -195,6 +199,10 @@ export default function Authors() {
         setCroppedImageURL(null);
     }
 
+    const listAuthors = () => {
+        console.log(authors);
+    }
+
     return (
         <div>
             <div className="header-authors">
@@ -212,7 +220,7 @@ export default function Authors() {
                 <div className="container-action-books" style={{ userSelect: "none", marginLeft: '20%' }}>
                     <img src={logo2} alt="List Icon" className="logo-add-book" />
                     <p className="label-gnc">AUTHORS LIST</p>
-                    <div className="action-button-book">
+                    <div className="action-button-book" onClick={listAuthors}>
                         <p>OPEN</p>
                     </div>
                 </div>
