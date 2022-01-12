@@ -148,7 +148,7 @@ export default function Authors() {
                             makeErrorMessage(`Oopsie... ${error}`, 5000);
                             return;
                         });
-                    })
+                    });
                 });
 
             } else {
@@ -237,7 +237,7 @@ export default function Authors() {
                             return (<option key={key}>{val}</option>)
                         })}
                     </select>
-                    <button onClick={handleSubmit}>Submit placeholder</button>
+                    <button onClick={handleSubmit}>Submit</button>
                 </div>
                 <div className='right-side-authors-modal'>
                     <div className='upper-rsam'>

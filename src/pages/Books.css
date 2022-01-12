@@ -69,3 +69,114 @@
 .action-button-book:active {
     opacity: 0.5;
 }
+
+.left-side-books-modal {
+    width: 50%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 130%;
+}
+
+.left-side-books-modal p {
+    color: #202c39;
+    margin-top: 5%;
+    margin-bottom: 2%;
+    font-size: 28px;
+}
+
+.left-side-books-modal input {
+    width: 75%;
+    border: 0;
+    background: #202c39;
+    height: 10%;
+    border-radius: 25px;
+    color: white;
+    margin-top: 5%;
+    padding-left: 5%;
+    font-size: 18px;
+}
+
+.left-side-books-modal input:focus {
+    border: none;
+    outline: none;
+}
+
+.left-side-books-modal select {
+    width: 80%;
+    border: 0;
+    background: #202c39;
+    height: 10%;
+    border-radius: 25px;
+    color: white;
+    margin-top: 5%;
+    padding-left: 5%;
+    font-size: 18px;
+    -moz-appearance:none;
+    -webkit-appearance:none;
+    appearance:none;
+}
+
+.left-side-books-modal input[type=number] {
+    margin-top: 0;
+}
+
+.left-side-books-modal label {
+    margin-top: 5%;
+    margin-bottom: 1%;
+    align-self: flex-start;
+    margin-left: 15%;
+}
+
+.left-side-books-modal textarea {
+    width: 80%;
+    border: 0;
+    background: #202c39;
+    height: 10%;
+    border-radius: 25px;
+    color: white;
+    margin-top: 5%;
+    padding-left: 5%;
+    padding-top: 5%;
+    font-size: 18px;
+}
+
+.left-side-books-modal button {
+    width: 60%;
+    border: 0;
+    background: transparent;
+    border: 2px solid #202c39;
+    height: 10%;
+    border-radius: 25px;
+    color: #202c39;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    padding-left: 5%;
+    font-size: 18px;
+}
+
+.left-side-books-modal button:hover {
+    background-color: #202c3936;
+}
+
+.left-side-books-modal button:active {
+    background-color: #202c397c;
+}
+
+.right-side-books-modal {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.image-display-books-modal {
+    width: 200px;
+    aspect-ratio: 1 / 1.5;
+    object-fit: cover;
+    overflow: hidden;
+    margin-bottom: 0;
+}
