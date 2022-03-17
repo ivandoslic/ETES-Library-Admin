@@ -3,6 +3,7 @@
 }
 
 .header-books {
+    user-select: none;
     width: 95%;
     height: 30vh;
     border-radius: 25px;

@@ -1,0 +1,135 @@
+.search-input-container {
+    width: 50%;
+    justify-self: center;
+    align-self: center;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.search-input-container input {
+    width: 90%;
+}
+
+.users-search-results-container {
+    position: absolute;
+    z-index: 99;
+    margin-top: 65px;
+    width: 30%;
+    background-color: #202c39;
+    filter: drop-shadow(0 0 1rem black);
+}
+
+.users-search-item {
+    user-select: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 10px;
+    transition: 150ms;
+}
+
+.users-search-item:hover {
+    background-color: rgba(0, 0, 0, 0.6);
+    transition: 150ms;
+}
+
+.users-search-item img {
+    width: 75px;
+    height: 75px;
+    object-fit: cover;
+}
+
+.users-search-item div {
+    padding-left: 15px;
+}
+
+.users-search-item-name {
+    color: white;
+    margin-bottom: 0;
+}
+
+.users-search-item-uid {
+    color: gray;
+    margin-top: 3px;
+}
+
+.users-search-item-unavailable {
+    user-select: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 10px;
+    opacity: 0.4;
+    transition: 150ms;
+}
+
+.users-search-item-unavailable:hover {
+    background-color: rgba(0, 0, 0, 0.6);
+    opacity: 0.7;
+    transition: 150ms;
+}
+
+.users-search-item-unavailable img {
+    width: 75px;
+    height: 75px;
+    object-fit: cover;
+}
+
+.users-search-item-unavailable div {
+    padding-left: 15px;
+}
+
+.book-search-item {
+    user-select: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 10px;
+    transition: 150ms;
+}
+
+.book-search-item:hover {
+    background-color: rgba(0, 0, 0, 0.6);
+    transition: 150ms;
+}
+
+.book-search-item img {
+    width: 75px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.book-search-item div {
+    display: flex;
+    flex-direction: column;
+    padding-left: 15px;
+}
+
+.book-search-item-unavailable {
+    user-select: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 10px;
+    opacity: 0.4;
+    transition: 150ms;
+}
+
+.book-search-item-unavailable:hover {
+    background-color: rgba(0, 0, 0, 0.6);
+    opacity: 0.7;
+    transition: 150ms;
+}
+
+.book-search-item-unavailable img {
+    width: 75px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.book-search-item-unavailable div {
+    display: flex;
+    flex-direction: column;
+    padding-left: 15px;
+}

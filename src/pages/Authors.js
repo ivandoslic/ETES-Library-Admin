@@ -43,7 +43,8 @@ export default function Authors() {
     const [snackbarAlertType, setSnackbarAlertType] = useState('success');
 
     // Data context
-    const authors = useContext(FirebaseContentContext);
+    const firestoreData = useContext(FirebaseContentContext);
+    const authors = firestoreData.authors;
 
     const handleCroppingDone = (croppedImage) => {
         const croppedImageUrl = URL.createObjectURL(croppedImage);

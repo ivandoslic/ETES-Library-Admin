@@ -13,6 +13,7 @@ import OptimizedSnackbar from '../components/OptimizedSnackbar';
 import base from '../base';
 import { getDownloadURL, uploadBytesResumable, ref } from 'firebase/storage';
 import { addDoc, collection } from 'firebase/firestore';
+import { addToAlgoliaIndex } from '../AlgoliaSearchContext'
 
 function Books() {
     const [showModal, setShowModal] = useState(false);
@@ -26,7 +27,8 @@ function Books() {
     const [bookDescription, setBookDescription] = useState('');
 
     // Authors:
-    const authors = useContext(FirebaseContentContext);
+    const firestoreData = useContext(FirebaseContentContext);
+    const authors = firestoreData.authors;
     const [selectedAuthor, setSelectedAuthor] = useState('');
     const [selectedAuthorObj, setSelectedAuthorObj] = useState(authors[0]);
 
@@ -203,6 +205,14 @@ function Books() {
                         description: bookDescription,
                         cover: downloadURL
                     }).then((docRef) => {
+                        const bookDataForAlgolia = {
+                            objectID: docRef.id,
+                            title: booksTitle,
+                            author: selectedAuthorObj.name,
+                            description: bookDescription,
+                            cover: downloadURL
+                        }
+                        addToAlgoliaIndex(bookDataForAlgolia);
                         makeSuccessMessage("Successfully added book to database!", 5000);
                         resetEverything();
                     }).catch(error => {
@@ -230,10 +240,18 @@ function Books() {
                 description: bookDescription,
                 cover: ""
             }).then((docRef) => {
+                const bookDataForAlgolia = {
+                    objectID: docRef.id,
+                    title: booksTitle,
+                    author: selectedAuthorObj.name,
+                    description: bookDescription
+                }
+                addToAlgoliaIndex(bookDataForAlgolia);
                 makeSuccessMessage("Successfully added book to database!", 5000);
                 resetEverything();
             }).catch(error => {
                 makeErrorMessage(`Oopsie... ${error}`, 5000);
+                console.log(error);
                 return;
             });
         }

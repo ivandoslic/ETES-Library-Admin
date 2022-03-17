@@ -3,6 +3,7 @@ import AchievementsOpenHome from '../components/AchievementsOpenHome';
 import GlobalNotificationsCreate from '../components/GlobalNotificationsCreate';
 import LatestReviewHome from '../components/LatestReviewHome';
 import LibrariansChoicePreview from '../components/LibrariansChoicePreview';
+import base from '../base';
 import './Home.css'
 
 function Home() {

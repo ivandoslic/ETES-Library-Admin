@@ -1,0 +1,85 @@
+.assignment-list-item-container {
+    user-select: none;
+    width: 95%;
+    height: 75px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-bottom: 3px rgb(54, 54, 54) solid;
+}
+
+.assignment-list-item-container:hover {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.assignment-list-item-container img {
+    height: 50px;
+    width: 50px;
+    object-fit: cover;
+    border-radius: 25px;
+    margin-left: 10px;
+}
+
+.assignment-list-item-info-user-book {
+    color: white;
+    margin-left: 15px;
+    width: 50%;
+}
+
+.assignment-list-item-info-user-book p {
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-top: 5px;
+}
+
+.assignment-list-item-title {
+    font-size: 24px;
+}
+
+.assignment-list-item-info-dates {
+    color: gray;
+    width: 30%;
+}
+
+.assignment-list-item-options-button {
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    width: 10%;
+}
+
+.assignment-list-item-options-button-icon:hover {
+    opacity: 0.6;
+}
+
+.assignment-list-item-options-button-icon:active {
+    opacity: 0.4;
+}
+
+.assignment-list-item-options-container {
+    position: absolute;
+    z-index: 99;
+    width: 150px;
+    background-color: rgba(0, 0, 0, 0.8);
+    margin-top: 20px;
+    margin-right: 5px;
+    padding-right: 10px;
+    text-align: right;
+}
+
+.assignment-item-options-item {
+    width: 100%;
+    transition: 150ms;
+}
+
+.assignment-item-options-item:hover {
+    opacity: 0.6;
+    transition: 150ms;
+}
+
+.assignment-item-options-item:active {
+    opacity: 0.3;
+    transition: 150ms;
+}
