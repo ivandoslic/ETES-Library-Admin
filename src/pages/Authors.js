@@ -13,6 +13,7 @@ import * as RiIcons from 'react-icons/ri'
 import ImageCropper from '../components/ImageCropper'
 import CircularProgress from '@mui/material/CircularProgress';
 import OptimizedSnackbar from '../components/OptimizedSnackbar';
+import AuthorListItem from '../components/AuthorListItem';
 import { FirebaseContentContext } from '../FirebaseContent';
 
 export default function Authors() {
@@ -30,6 +31,9 @@ export default function Authors() {
     const [selectedAuthorImage, setSelectedAuthorImage] = useState(null);
     const [selectedImageURL, setSelectedImageURL] = useState(null);
 
+    // List:
+    const [showList, setShowList] = useState(false);
+
     // Image Cropper :
     const [showCropper, setShowCropper] = useState(false);
     const [croppedImageURL, setCroppedImageURL] = useState(null);
@@ -45,6 +49,10 @@ export default function Authors() {
     // Data context
     const firestoreData = useContext(FirebaseContentContext);
     const authors = firestoreData.authors;
+
+    const activateList = () => {
+        setShowList(prev => !prev);
+    }
 
     const handleCroppingDone = (croppedImage) => {
         const croppedImageUrl = URL.createObjectURL(croppedImage);
@@ -221,7 +229,7 @@ export default function Authors() {
                 <div className="container-action-books" style={{ userSelect: "none", marginLeft: '20%' }}>
                     <img src={logo2} alt="List Icon" className="logo-add-book" />
                     <p className="label-gnc">AUTHORS LIST</p>
-                    <div className="action-button-book" onClick={listAuthors}>
+                    <div className="action-button-book" onClick={activateList}>
                         <p>OPEN</p>
                     </div>
                 </div>
@@ -269,6 +277,24 @@ export default function Authors() {
                 setMessage={setSnackbarMessage}
                 type={snackbarAlertType}
             />
+            <Modal show={showList} setShow={activateList}>
+                <div style={{ width: '100%', height: '100%', overflowY: 'scroll' }}>
+                    <div className='upper-rsam' style={{ marginTop: '10px' }}>
+                        <MdIcons.MdClose className='close-icon-modal' size={32} color='white' onClick={activateList} />
+                    </div>
+                    {authors.length > 0 ?
+                        <div>
+                            {authors.map((author) => (
+                                <AuthorListItem key={author.uid} author={author} />
+                            ))}
+                        </div>
+                        :
+                        <div>
+                            <p>Oops no authors!</p>
+                        </div>
+                    }
+                </div>
+            </Modal>
         </div>
     )
 }

@@ -1,0 +1,31 @@
+.author-list-item-container {
+    user-select: none;
+    width: 100%;
+    height: 100px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    margin-left: 2%;
+    align-items: center;
+    transition: 200ms;
+}
+
+.author-list-item-info-div {
+    color: white;
+    margin-left: 5%;
+}
+
+.author-list-item-info-div h4 {
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0;
+}
+
+.author-list-item-container:hover {
+    transform: scale(1.1) translateX(50px);
+    transition: 200ms;
+}
+
+.author-list-item-container:active {
+    background-color: rgba(0, 0, 0, 0.25);
+    transition: 10ms;
+}

@@ -7,7 +7,7 @@
     width: 95%;
     height: 30vh;
     border-radius: 25px;
-    background: linear-gradient(rgba(32, 44, 57, 0.5), rgba(32, 44, 57,.5)), url(https://firebasestorage.googleapis.com/v0/b/eteslib.appspot.com/o/CroppedBooksHeader.jpg?alt=media&token=2e457fc5-6f01-487b-93db-d5f3cba2df55);
+    background: linear-gradient(rgba(32, 44, 57, 0.5), rgba(32, 44, 57, .5)), url(https://firebasestorage.googleapis.com/v0/b/eteslib.appspot.com/o/CroppedBooksHeader.jpg?alt=media&token=2e457fc5-6f01-487b-93db-d5f3cba2df55);
     background-size: cover;
 }
 
@@ -115,9 +115,9 @@
     margin-top: 5%;
     padding-left: 5%;
     font-size: 18px;
-    -moz-appearance:none;
-    -webkit-appearance:none;
-    appearance:none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
 }
 
 .left-side-books-modal input[type=number] {
@@ -180,4 +180,49 @@
     object-fit: cover;
     overflow: hidden;
     margin-bottom: 0;
+}
+
+.book-to-edit-screen {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.book-to-edit-cover {
+    height: 60%;
+    object-fit: contain;
+    margin-left: 5%;
+}
+
+.book-to-edit-fields-div {
+    width: 85%;
+    text-align: center;
+}
+
+.book-to-edit-title {
+    color: white;
+    margin-top: 10px;
+    margin-left: 2%;
+    height: 34px;
+    background: none;
+    background-color: none;
+    border: none;
+    border-bottom: solid rgba(255, 255, 255, 0.158) 2px;
+    outline: none;
+    font-size: 18px;
+}
+
+.book-edit-disabled-update {
+    display: flex;
+    user-select: none;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    border: rgba(255, 255, 255, 0.38) solid 3px;
+    border-radius: 15px;
+    width: 40%;
+    height: 50px;
+    color: rgba(255, 255, 255, 0.38);
+    transition: 250ms;
 }

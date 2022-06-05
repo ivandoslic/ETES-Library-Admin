@@ -12,8 +12,8 @@ import * as RiIcons from 'react-icons/ri';
 import OptimizedSnackbar from '../components/OptimizedSnackbar';
 import base from '../base';
 import { getDownloadURL, uploadBytesResumable, ref } from 'firebase/storage';
-import { addDoc, collection } from 'firebase/firestore';
-import { addToAlgoliaIndex } from '../AlgoliaSearchContext'
+import { addDoc, arrayUnion, collection, doc, setDoc, updateDoc } from 'firebase/firestore';
+import BookListItem from '../components/BookListItem';
 
 function Books() {
     const [showModal, setShowModal] = useState(false);
@@ -25,6 +25,9 @@ function Books() {
     const [bookLanguage, setBookLanguage] = useState('');
     const [bookGenre, setBookGenre] = useState('');
     const [bookDescription, setBookDescription] = useState('');
+
+    // List:
+    const [showList, setShowList] = useState(false);
 
     // Authors:
     const firestoreData = useContext(FirebaseContentContext);
@@ -47,6 +50,8 @@ function Books() {
     const [snackbarMessage, setSnackbarMessage] = useState(null);
     const [snackbarAlertType, setSnackbarAlertType] = useState('success');
 
+    const books = firestoreData.books;
+
     useEffect(() => {
         if (selectedAuthor !== null && selectedAuthor.slice() !== '')
             getAuthorByID(selectedAuthor);
@@ -54,6 +59,10 @@ function Books() {
 
     const activatePopup = () => {
         setShowModal(prev => !prev);
+    }
+
+    const activateList = () => {
+        setShowList(prev => !prev);
     }
 
     const getAuthorByID = (uid) => {
@@ -205,14 +214,16 @@ function Books() {
                         description: bookDescription,
                         cover: downloadURL
                     }).then((docRef) => {
-                        const bookDataForAlgolia = {
-                            objectID: docRef.id,
-                            title: booksTitle,
-                            author: selectedAuthorObj.name,
-                            description: bookDescription,
-                            cover: downloadURL
+                        const tempBookSearchItem = {
+                            uid: docRef.id,
+                            title: selectedAuthorObj.name + "|" + booksTitle,
+                            image: downloadURL,
+                            genre: bookGenre
                         }
-                        addToAlgoliaIndex(bookDataForAlgolia);
+                        const searchBookItemsRef = doc(base.firestoreDB, 'search/search-books');
+                        updateDoc(searchBookItemsRef, {
+                            items: arrayUnion(tempBookSearchItem)
+                        });
                         makeSuccessMessage("Successfully added book to database!", 5000);
                         resetEverything();
                     }).catch(error => {
@@ -240,13 +251,6 @@ function Books() {
                 description: bookDescription,
                 cover: ""
             }).then((docRef) => {
-                const bookDataForAlgolia = {
-                    objectID: docRef.id,
-                    title: booksTitle,
-                    author: selectedAuthorObj.name,
-                    description: bookDescription
-                }
-                addToAlgoliaIndex(bookDataForAlgolia);
                 makeSuccessMessage("Successfully added book to database!", 5000);
                 resetEverything();
             }).catch(error => {
@@ -274,7 +278,7 @@ function Books() {
                 <div className="container-action-books" style={{ userSelect: "none", marginLeft: '20%' }}>
                     <img src={logo2} alt="List Icon" className="logo-add-book" />
                     <p className="label-gnc">BOOK LIST</p>
-                    <div className="action-button-book">
+                    <div className="action-button-book" onClick={activateList}>
                         <p>OPEN</p>
                     </div>
                 </div>
@@ -329,6 +333,24 @@ function Books() {
                 setMessage={setSnackbarMessage}
                 type={snackbarAlertType}
             />
+            <Modal show={showList} setShow={activateList}>
+                <div style={{ width: '100%', height: '100%', overflowY: 'scroll' }}>
+                    <div className='upper-rsam' style={{ marginTop: '10px' }}>
+                        <MdIcons.MdClose className='close-icon-modal' size={32} color='white' onClick={activateList} />
+                    </div>
+                    {books.length > 0 ?
+                        <div>
+                            {books.map((book) => (
+                                <BookListItem key={book.uid} book={book} />
+                            ))}
+                        </div>
+                        :
+                        <div>
+                            <p>Oops no books!</p>
+                        </div>
+                    }
+                </div>
+            </Modal>
         </div>
     )
 }

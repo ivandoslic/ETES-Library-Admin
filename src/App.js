@@ -10,7 +10,6 @@ import AchievementInfo from './components/AchievementInfo';
 import SidebarActionButtons from './components/SidebarActionButtons';
 import { AuthProvider } from './Auth';
 import { FirebaseContentProvider } from './FirebaseContent';
-import * as AlgoliaSearch from './AlgoliaSearchContext';
 
 function App() {
   return (

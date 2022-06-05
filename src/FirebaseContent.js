@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import Base from './base';
 import { collection, onSnapshot } from 'firebase/firestore';
-import { addToAlgoliaIndex } from './AlgoliaSearchContext';
 
 var authors = [];
 var books = [];
@@ -56,7 +55,8 @@ function updateBooksJSON(doc) {
         language: bookData.language,
         title: bookData.title,
         year: bookData.yearWritten,
-        amount: bookData.amount
+        amount: bookData.amount,
+        description: bookData.description
     });
 }
 

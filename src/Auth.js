@@ -5,6 +5,10 @@ import Login from "./pages/Login";
 
 export const AuthContext = React.createContext();
 
+export const logout = () => {
+    FirebaseAuth.signOut(FirebaseAuth.getAuth());
+}
+
 export const AuthProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState(null);
 
