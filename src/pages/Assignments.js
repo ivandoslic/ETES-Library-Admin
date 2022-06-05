@@ -196,7 +196,7 @@ function Assignments() {
                         </div>
                         :
                         <div>
-                            <p>Oops no reviews!</p>
+                            <p style={{ color: 'white' }}>Oops no assignments...</p>
                         </div>
                     }
                 </div>

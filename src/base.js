@@ -25,6 +25,26 @@ async function sendMessageToUser(userFCMtoken, title, message) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
+            "to": userFCMtoken,
+            "notification": {
+                "body": message,
+                "title": title,
+            }
+        })
+    });
+
+    console.log(response.json());
+}
+
+async function sendGlobalNotificationMessage(title, message) {
+    console.log("sending request!");
+    const response = await fetch("https://fcm.googleapis.com/fcm/send", {
+        method: "POST",
+        headers: {
+            'Authorization': "key=" + process.env.REACT_APP_SERVER_KEY,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
             "to": "eEMqssdMQ7mh6--72EpUSb:APA91bH0sR_JT0vVSCRn85kxBbP23imKq4ujML4ximK7QSGsOCPiv6TqxRONAKsEEWq06KEjrJ6r-g9KiJIfqxWuL_nx3GbPNsdmfVY_esSP2Zjn4WnHtKM57uIKf2wQ-Xq89nvHVJ62",
             "notification": {
                 "body": message,
@@ -36,4 +56,4 @@ async function sendMessageToUser(userFCMtoken, title, message) {
     console.log(response.json());
 }
 
-export default { app, storage, firestoreDB, sendMessageToUser };
+export default { app, storage, firestoreDB, sendMessageToUser, sendGlobalNotificationMessage };
